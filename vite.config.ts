@@ -17,8 +17,9 @@ export default defineConfig(({ command }) => ({
         background_color: "#ffffff",
         display: "standalone",
         orientation: "portrait",
-        start_url: "./",
-        scope: "./",
+        // ВАЖНО: Ова ја поправа 404 грешката на мобилен
+        start_url: "/AquaCode/",
+        scope: "/AquaCode/",
         icons: [
           {
             src: "logo.jpg",
@@ -67,12 +68,10 @@ export default defineConfig(({ command }) => ({
       }
     })
   ],
-  // ОВА Е КЛУЧНАТА ПРОМЕНА:
-  // Ако е локално (serve) користи '/', ако е build користи '/AquaCode/'
   base: command === 'serve' ? '/' : '/AquaCode/',
   server: {
-    port: 5173, // Фиксирај ја портата на 5173
-    strictPort: false, // Ако 5173 е зафатена, оди на следната
+    port: 5173,
+    strictPort: false,
     host: true
   }
 }));

@@ -97,7 +97,7 @@ const App: React.FC = () => {
   // --- AUTH HANDLER ---
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // HARDCODED PASSWORD HERE - Change 'Vlado' to whatever you want
+    // --- ПРОМЕНЕТЕ ЈА ЛОЗИНКАТА ОВДЕ ---
     if (passwordInput === 'Vlado') {
       setIsAuthenticated(true);
       sessionStorage.setItem('aqua_auth', 'true');
@@ -297,9 +297,9 @@ const App: React.FC = () => {
          <div className="relative z-10 bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/10 shadow-2xl max-w-md w-full">
             <div className="text-center mb-8">
                <img 
-                  src="AQUA Code logo.jpg" 
+                  src="logo.jpg" 
                   alt="AQUA Code" 
-                  className="w-24 h-24 rounded-2xl mx-auto mb-4 shadow-lg border-2 border-cyan-400" 
+                  className="w-24 h-24 rounded-2xl mx-auto mb-4 shadow-lg border-2 border-cyan-400 object-cover" 
                />
                <h1 className="text-3xl font-black text-white tracking-tight mb-2">AQUA CODE</h1>
                <p className="text-cyan-200 text-sm font-medium">ВАТЕРПОЛО ТРЕНИНГ</p>
@@ -353,7 +353,7 @@ const App: React.FC = () => {
                 <div>
                    <h1 className="text-3xl md:text-5xl font-black tracking-tighter mb-2 flex items-center">
                       <img 
-                        src="AQUA Code logo.jpg" 
+                        src="logo.jpg" 
                         alt="AQUA Code" 
                         className="w-12 h-12 md:w-16 md:h-16 rounded-xl mr-3 shadow-lg border-2 border-white/10 object-cover" 
                       />

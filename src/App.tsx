@@ -6,7 +6,7 @@ import ProPlan from './components/ProPlan';
 import Stats from './components/Stats';
 import Gallery from './components/Gallery';
 import { TabType, Exercise, RoutineItem, DailyStats, GalleryImage, ScheduledWorkout } from './types';
-import { Moon, Sun, MapPin, Phone, Mail, Facebook, Instagram, Youtube, Twitter, Clock, Ruler, Thermometer, Users, Car, Navigation as NavIcon, ChevronLeft, ChevronRight, X, Play, Trash2, Quote, MessageSquarePlus, Github, Lock } from 'lucide-react';
+import { Moon, Sun, MapPin, Phone, Mail, Facebook, Instagram, Youtube, Twitter, Clock, Ruler, Thermometer, Users, Car, Navigation as NavIcon, ChevronLeft, ChevronRight, X, Play, Trash2, Quote, MessageSquarePlus, Lock } from 'lucide-react';
 
 const App: React.FC = () => {
   // --- AUTHENTICATION STATE ---
@@ -724,11 +724,6 @@ const App: React.FC = () => {
 
             <div className="pt-8 border-t border-gray-800">
                <p className="text-sm text-gray-500 font-bold uppercase tracking-wider">Развиено од Владо Смилевски</p>
-               <div className="flex items-center justify-center gap-2 mt-3">
-                 <a href="https://github.com/aquacodemk/AquaCode" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                    <Github size={20} />
-                 </a>
-               </div>
                <p className="text-xs text-gray-600 mt-2">&copy; {new Date().getFullYear()} AQUA CODE. Сите права се задржани.</p>
             </div>
          </div>

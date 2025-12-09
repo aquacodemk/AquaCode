@@ -6,10 +6,15 @@ import ProPlan from './components/ProPlan';
 import Stats from './components/Stats';
 import Gallery from './components/Gallery';
 import { TabType, Exercise, RoutineItem, DailyStats, GalleryImage, ScheduledWorkout } from './types';
-import { Moon, Sun, MapPin, Phone, Mail, Facebook, Instagram, Youtube, Twitter, Clock, Ruler, Thermometer, Users, Car, Navigation as NavIcon, ChevronLeft, ChevronRight, X, Play, Trash2, Quote, MessageSquarePlus, Github } from 'lucide-react';
+import { Moon, Sun, MapPin, Phone, Mail, Facebook, Instagram, Youtube, Twitter, Clock, Ruler, Thermometer, Users, Car, Navigation as NavIcon, ChevronLeft, ChevronRight, X, Play, Trash2, Quote, MessageSquarePlus, Github, Lock } from 'lucide-react';
 
 const App: React.FC = () => {
-  // State
+  // --- AUTHENTICATION STATE ---
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [authError, setAuthError] = useState(false);
+
+  // --- APP STATE ---
   const [activeTab, setActiveTab] = useState<TabType>('planner');
   const [darkMode, setDarkMode] = useState(false);
   const [currentRoutine, setCurrentRoutine] = useState<RoutineItem[]>([]);
@@ -31,6 +36,12 @@ const App: React.FC = () => {
 
   // Initialize
   useEffect(() => {
+    // Check Authentication Session
+    const sessionAuth = sessionStorage.getItem('aqua_auth');
+    if (sessionAuth === 'true') {
+      setIsAuthenticated(true);
+    }
+
     // Theme
     const savedTheme = localStorage.getItem('aqua-theme');
     if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -82,6 +93,20 @@ const App: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('aqua_activity_log', JSON.stringify(activityLog));
   }, [activityLog]);
+
+  // --- AUTH HANDLER ---
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    // HARDCODED PASSWORD HERE - Change 'Vlado' to whatever you want
+    if (passwordInput === 'Vlado') {
+      setIsAuthenticated(true);
+      sessionStorage.setItem('aqua_auth', 'true');
+      setAuthError(false);
+    } else {
+      setAuthError(true);
+      setPasswordInput('');
+    }
+  };
 
   // Handlers
   const toggleTheme = () => {
@@ -261,6 +286,63 @@ const App: React.FC = () => {
     setCurrentDate(newDate);
   };
 
+  // --- RENDER LOGIN SCREEN IF NOT AUTHENTICATED ---
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4 relative overflow-hidden">
+         {/* Background Effect */}
+         <div className="absolute inset-0 bg-gradient-to-br from-cyan-900 via-gray-900 to-blue-900 opacity-80"></div>
+         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
+
+         <div className="relative z-10 bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/10 shadow-2xl max-w-md w-full">
+            <div className="text-center mb-8">
+               <img 
+                  src="AQUA Code logo.jpg" 
+                  alt="AQUA Code" 
+                  className="w-24 h-24 rounded-2xl mx-auto mb-4 shadow-lg border-2 border-cyan-400" 
+               />
+               <h1 className="text-3xl font-black text-white tracking-tight mb-2">AQUA CODE</h1>
+               <p className="text-cyan-200 text-sm font-medium">ВАТЕРПОЛО ТРЕНИНГ</p>
+            </div>
+
+            <form onSubmit={handleLogin} className="space-y-6">
+               <div>
+                  <label className="block text-cyan-100 text-sm font-bold mb-2 ml-1">
+                     <div className="flex items-center gap-2">
+                        <Lock size={16} /> Внесете Лозинка
+                     </div>
+                  </label>
+                  <input 
+                     type="password" 
+                     value={passwordInput}
+                     onChange={(e) => setPasswordInput(e.target.value)}
+                     className="w-full px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all text-center tracking-widest text-lg"
+                     placeholder="••••••"
+                  />
+                  {authError && (
+                     <p className="text-red-400 text-xs mt-2 text-center font-bold animate-pulse">
+                        Погрешна лозинка. Обидете се повторно.
+                     </p>
+                  )}
+               </div>
+
+               <button 
+                  type="submit" 
+                  className="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold rounded-xl shadow-lg transform transition-all hover:scale-[1.02] active:scale-95"
+               >
+                  ВЛЕЗИ
+               </button>
+            </form>
+            
+            <p className="text-center text-gray-500 text-xs mt-8">
+               &copy; {new Date().getFullYear()} Developed by Vlado Smilevski
+            </p>
+         </div>
+      </div>
+    );
+  }
+
+  // --- MAIN APP ---
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 pb-20 flex flex-col">
       <header className="bg-gradient-to-br from-cyan-900 via-cyan-700 to-blue-800 text-white pt-8 pb-12 px-4 md:px-6 relative overflow-hidden">

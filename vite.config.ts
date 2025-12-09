@@ -1,8 +1,9 @@
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
     react(),
     VitePWA({
@@ -41,7 +42,7 @@ export default defineConfig({
               cacheName: 'google-fonts-cache',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
+                maxAgeSeconds: 60 * 60 * 24 * 365
               },
               cacheableResponse: {
                 statuses: [0, 200]
@@ -55,7 +56,7 @@ export default defineConfig({
               cacheName: 'gstatic-fonts-cache',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
+                maxAgeSeconds: 60 * 60 * 24 * 365
               },
               cacheableResponse: {
                 statuses: [0, 200]
@@ -66,5 +67,12 @@ export default defineConfig({
       }
     })
   ],
-  base: '/AquaCode/',
-});
+  // ОВА Е КЛУЧНАТА ПРОМЕНА:
+  // Ако е локално (serve) користи '/', ако е build користи '/AquaCode/'
+  base: command === 'serve' ? '/' : '/AquaCode/',
+  server: {
+    port: 5173, // Фиксирај ја портата на 5173
+    strictPort: false, // Ако 5173 е зафатена, оди на следната
+    host: true
+  }
+}));

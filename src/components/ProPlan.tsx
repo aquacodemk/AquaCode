@@ -12,10 +12,10 @@ const ProPlan: React.FC = () => {
       <div className="bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
         <div className="relative z-10 max-w-3xl">
           <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">
-            🏆 Ватерполо тренинг план
+            🏆 AQUA CODE Тренинг План
           </h2>
           <p className="text-indigo-200 text-lg md:text-xl font-light leading-relaxed">
-            Микро и макро циклуси дизајнирани од Владо Смилевски за максимална експлозивност и издржливост.
+            Систем за градење на комплетен играч – сила, техника, брзина и карактер со Владо Смилевски
           </p>
           
           <div className="flex gap-4 mt-8">

@@ -289,52 +289,62 @@ const App: React.FC = () => {
   // --- RENDER LOGIN SCREEN IF NOT AUTHENTICATED ---
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4 relative overflow-hidden">
-         {/* Background Effect */}
-         <div className="absolute inset-0 bg-gradient-to-br from-cyan-900 via-gray-900 to-blue-900 opacity-80"></div>
-         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 relative overflow-hidden">
+         {/* Glassmorphism Background */}
+         <div className="absolute inset-0 bg-gradient-to-br from-cyan-900 to-blue-900"></div>
+         {/* Animated Blobs */}
+         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-500/30 rounded-full blur-[100px] animate-pulse-slow"></div>
+         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/30 rounded-full blur-[100px] animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
 
-         <div className="relative z-10 bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/10 shadow-2xl max-w-md w-full">
-            <div className="text-center mb-8">
-               <img 
-                  src="logo.jpg" 
-                  alt="AQUA Code" 
-                  className="w-24 h-24 rounded-2xl mx-auto mb-4 shadow-lg border-2 border-cyan-400 object-cover" 
-               />
-               <h1 className="text-3xl font-black text-white tracking-tight mb-2">AQUA CODE</h1>
-               <p className="text-cyan-200 text-sm font-medium">ВАТЕРПОЛО ТРЕНИНГ</p>
+         {/* Login Card - REDESIGNED: LOGO LEFT, TEXT RIGHT */}
+         <div className="relative z-10 bg-white/10 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/20 shadow-2xl max-w-lg w-full mx-4 animate-fade-in">
+            
+            <div className="flex flex-col md:flex-row items-center gap-6 mb-8">
+               <div className="flex-shrink-0">
+                  <img 
+                      src="logo.jpg" 
+                      alt="AQUA Code" 
+                      className="w-24 h-24 md:w-32 md:h-32 rounded-2xl object-cover bg-white shadow-xl border-4 border-white/10" 
+                  />
+               </div>
+               <div className="text-center md:text-left">
+                  <h1 className="text-4xl md:text-5xl font-black text-white tracking-tighter drop-shadow-md">AQUA CODE</h1>
+                  <div className="h-1 w-16 bg-cyan-500 rounded-full my-2 md:mx-0 mx-auto"></div>
+                  <p className="text-cyan-200 font-medium tracking-wide text-sm uppercase">Професионален<br/>Ватерполо Тренинг</p>
+               </div>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-6">
-               <div>
-                  <label className="block text-cyan-100 text-sm font-bold mb-2 ml-1">
-                     <div className="flex items-center gap-2">
-                        <Lock size={16} /> Внесете Лозинка
-                     </div>
-                  </label>
-                  <input 
-                     type="password" 
-                     value={passwordInput}
-                     onChange={(e) => setPasswordInput(e.target.value)}
-                     className="w-full px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all text-center tracking-widest text-lg"
-                     placeholder="••••••"
-                  />
+               <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-300"></div>
+                  <div className="relative bg-gray-900/60 rounded-xl p-1 border border-white/10 flex items-center">
+                      <div className="pl-4 text-cyan-400">
+                          <Lock size={20} />
+                      </div>
+                      <input 
+                         type="password" 
+                         value={passwordInput}
+                         onChange={(e) => setPasswordInput(e.target.value)}
+                         className="w-full px-4 py-3 bg-transparent text-white placeholder-gray-400 focus:outline-none text-center tracking-widest text-lg font-bold"
+                         placeholder="ВНЕСЕТЕ ЛОЗИНКА"
+                      />
+                  </div>
                   {authError && (
-                     <p className="text-red-400 text-xs mt-2 text-center font-bold animate-pulse">
-                        Погрешна лозинка. Обидете се повторно.
+                     <p className="absolute -bottom-6 left-0 right-0 text-red-400 text-xs text-center font-bold animate-pulse">
+                        Погрешна лозинка
                      </p>
                   )}
                </div>
 
                <button 
                   type="submit" 
-                  className="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold rounded-xl shadow-lg transform transition-all hover:scale-[1.02] active:scale-95"
+                  className="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold rounded-xl shadow-lg transform transition-all hover:scale-[1.02] active:scale-95 border border-white/10 tracking-wider"
                >
                   ВЛЕЗИ
                </button>
             </form>
             
-            <p className="text-center text-gray-500 text-xs mt-8">
+            <p className="text-center text-gray-400 text-xs mt-8 opacity-60">
                &copy; {new Date().getFullYear()} Developed by Vlado Smilevski
             </p>
          </div>
@@ -345,19 +355,21 @@ const App: React.FC = () => {
   // --- MAIN APP ---
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 pb-20 flex flex-col">
-      <header className="bg-gradient-to-br from-cyan-900 via-cyan-700 to-blue-800 text-white pt-8 pb-12 px-4 md:px-6 relative overflow-hidden">
+      <header className="bg-gradient-to-br from-cyan-900 via-cyan-700 to-blue-800 text-white pt-8 pb-12 px-4 md:px-6 relative overflow-hidden shadow-2xl">
+         {/* Texture Overlay */}
          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+         <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-50 dark:from-gray-900 to-transparent z-10"></div>
          
          <div className="max-w-7xl mx-auto relative z-10">
              <div className="flex justify-between items-start mb-6">
-                <div>
+                <div className="animate-slide-up">
                    <h1 className="text-3xl md:text-5xl font-black tracking-tighter mb-2 flex items-center">
                       <img 
                         src="logo.jpg" 
                         alt="AQUA Code" 
-                        className="w-12 h-12 md:w-16 md:h-16 rounded-xl mr-3 shadow-lg border-2 border-white/10 object-cover" 
+                        className="w-16 h-16 md:w-20 md:h-20 rounded-2xl mr-4 shadow-2xl border-2 border-white/20 object-cover" 
                       />
-                      <span>AQUA CODE</span>
+                      <span className="drop-shadow-lg">AQUA CODE</span>
                    </h1>
                    <p className="text-cyan-100 font-bold tracking-wide text-xs md:text-sm uppercase opacity-90 leading-relaxed pl-1">
                       ВЕЖБАЈ • ИГРАЈ • ПОБЕДИ<br className="md:hidden" /> 
@@ -368,14 +380,14 @@ const App: React.FC = () => {
                 <button 
                   onClick={toggleTheme}
                   aria-label="Toggle theme"
-                  className="p-2 md:p-3 bg-white/10 backdrop-blur-md rounded-full hover:bg-white/20 transition-all border border-white/20 flex-shrink-0 ml-4"
+                  className="p-2 md:p-3 bg-white/10 backdrop-blur-md rounded-full hover:bg-white/20 transition-all border border-white/20 flex-shrink-0 ml-4 shadow-lg"
                 >
                    {darkMode ? <Sun size={20} /> : <Moon size={20} />}
                 </button>
              </div>
 
-             <div className="mt-6 md:mt-8">
-                <p className="text-base md:text-lg text-cyan-50 font-light italic max-w-4xl border-l-4 border-cyan-400 pl-4 py-1">
+             <div className="mt-6 md:mt-8 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+                <p className="text-base md:text-lg text-cyan-50 font-light italic max-w-4xl border-l-4 border-cyan-400 pl-4 py-2 bg-black/10 backdrop-blur-sm rounded-r-xl">
                    "Нема комплицирана наука, туку практични вежби, лесни објаснувања и поддршка од заедница на луѓе кои, како тебе, сакаат само да уживаат во ватерполото и да напредуваат."
                    <span className="block text-xs md:text-sm font-bold text-white not-italic mt-2 opacity-90">— Владо Смилевски, Креатор на AQUA CODE</span>
                 </p>
@@ -383,7 +395,7 @@ const App: React.FC = () => {
          </div>
       </header>
 
-      <div className="-mt-6 relative z-20">
+      <div className="-mt-8 relative z-20 mx-4">
         <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
 

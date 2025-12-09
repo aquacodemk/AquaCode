@@ -1,7 +1,7 @@
 {
   "name": "aqua-code",
   "private": true,
-  "version": "2.3.1",
+  "version": "2.4.0",
   "type": "module",
   "homepage": "https://aquacodemk.github.io/AquaCode",
   "repository": {
@@ -30,6 +30,7 @@
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
-    "vite": "^5.1.4"
+    "vite": "^5.1.4",
+    "vite-plugin-pwa": "^0.19.2"
   }
 }

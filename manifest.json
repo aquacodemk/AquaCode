@@ -1,3 +1,4 @@
+
 {
   "name": "AQUA CODE",
   "short_name": "AQUA CODE",
@@ -9,12 +10,12 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "AQUA Code logo.jpg",
+      "src": "logo.jpg",
       "sizes": "192x192",
       "type": "image/jpeg"
     },
     {
-      "src": "AQUA Code logo.jpg",
+      "src": "logo.jpg",
       "sizes": "512x512",
       "type": "image/jpeg"
     }

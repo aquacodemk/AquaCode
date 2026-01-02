@@ -2,12 +2,24 @@
 export interface Exercise {
   id: string;
   name: string;
-  instruction: string;
-  goal: string;
-  icon: string;
-  category: string; // Used for filtering
-  tips?: string; // Proper form/execution tips
-  mistakes?: string; // Common mistakes to avoid
+  englishName?: string;
+  description?: string;
+  note?: string;
+  level?: string;
+  sets?: number | string;
+  reps?: string;
+  animation?: string;
+  explanation?: string;
+  rating?: number;
+  difficulty?: string;
+  time?: string;
+  muscles?: string;
+  instruction?: string;
+  goal?: string;
+  icon?: string;
+  category?: string;
+  tips?: string;
+  mistakes?: string;
 }
 
 export interface ExerciseCategory {
@@ -15,22 +27,26 @@ export interface ExerciseCategory {
   items: Exercise[];
 }
 
-export interface RoutineItem {
-  id: string;
+export interface UserProfile {
   name: string;
-  addedAt: string; // ISO date string
+  level: string;
+  joinedDate: string;
+}
+
+export interface RoutineItem extends Exercise {
+  addedAt: string;
 }
 
 export interface SavedRoutine {
   id: number;
   name: string;
-  exercises: RoutineItem[];
+  exercises: RoutineItem[]; 
   createdAt: string;
   completed: boolean;
 }
 
 export interface ScheduledWorkout extends SavedRoutine {
-  date: string; // YYYY-MM-DD format
+  date: string; // YYYY-MM-DD
 }
 
 export interface DailyStats {
@@ -43,16 +59,24 @@ export interface DailyStats {
 
 export interface GalleryImage {
   id: number;
-  data: string; // Base64
+  data: string;
   name: string;
   timestamp: number;
 }
 
-export type TabType = 'planner' | 'pro-plan' | 'tactics' | 'calendar' | 'stats' | 'gallery' | 'contact';
-
 export interface PlanDay {
-  title: string;
-  type: string;
-  goal: string;
+  title: string; 
+  type: 'water' | 'dry' | 'rest'; 
+  goal: string; 
   items: string[];
 }
+
+export interface TacticObject {
+  id: string;
+  type: 'blue-cap' | 'white-cap' | 'red-cap' | 'ball';
+  x: number;
+  y: number;
+  number?: number;
+}
+
+export type TabType = 'planner' | 'tactics' | 'pro-plan' | 'calendar' | 'stats' | 'gallery' | 'contact';
